@@ -1,0 +1,4 @@
+[submodule "source/DataFieldWithFiveValues"]
+	path = source/DataFieldWithFiveValues
+	url = git@github.com:Daniel-Marynicz/GarminIQDataFieldWithFiveValues.git
+	branch = master
