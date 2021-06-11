@@ -22,14 +22,17 @@ class HRwithzoneView extends DataFieldWithFiveValuesView {
     // guarantee that compute() will be called before onUpdate().
     function compute(info) {
         var currentHRZone = currentHRZoneCompute.invoke(heartRateZones, info);
-        if(info has :currentHeartRate){
-            if(info.currentHeartRate != null){
-                mainValue = info.currentHeartRate;
-            } else {
-                mainValue = 0.0f;
-            }
+        var currentHeartRate = 0.0f;
+        if(info has :currentHeartRate && info.currentHeartRate != null){
+            currentHeartRate = info.currentHeartRate;
         }
-        bottomRightValue =  currentHRZone.format("%.1f") + "z";
-        mainValue = mainValue.format("%d");
+        mainValue = "___";
+        bottomRightValue = "_._z";
+        if (currentHRZone > 0.0f) {
+        	bottomRightValue =  currentHRZone.format("%.1f") + "z";
+        }
+        if (currentHeartRate > 0.0f) {
+        	mainValue = currentHeartRate.format("%d");
+        }
     }
 }
