@@ -3,15 +3,14 @@ using Toybox.Graphics;
 
 class HRwithzoneView extends DataFieldWithFiveValuesView {
 
-    hidden var currentHRZoneCompute;
-    hidden var heartRateZones;
+    private var hrZoneCalc;
+    private var heartRateZones;
 	
 
     function initialize() {
         DataFieldWithFiveValuesView.initialize();
         heartRateZones = UserProfile.getHeartRateZones(UserProfile.getCurrentSport());
-        var currentHRZoneCalc = new CurrentHRZone();
-        currentHRZoneCompute = currentHRZoneCalc.method(:compute);
+        hrZoneCalc = new CurrentHRZone(heartRateZones);
         labelValue = Rez.Strings.label;
     }
 
@@ -21,10 +20,11 @@ class HRwithzoneView extends DataFieldWithFiveValuesView {
     // Note that compute() and onUpdate() are asynchronous, and there is no
     // guarantee that compute() will be called before onUpdate().
     function compute(info) {
-        var currentHRZone = currentHRZoneCompute.invoke(heartRateZones, info);
+        var currentHRZone = 0.0f;
         var currentHeartRate = 0.0f;
         if(info has :currentHeartRate && info.currentHeartRate != null){
             currentHeartRate = info.currentHeartRate;
+            currentHRZone = hrZoneCalc.compute(info.currentHeartRate);
         }
         mainValue = "___";
         bottomRightValue = "_._z";
