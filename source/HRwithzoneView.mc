@@ -3,13 +3,11 @@ using Toybox.Graphics;
 
 class HRwithzoneView extends DataFieldWithFiveValuesView {
 
-    private var hrZoneCalc;
-    private var heartRateZones;
-	
+    protected var hrZoneCalc;
 
     function initialize() {
         DataFieldWithFiveValuesView.initialize();
-        heartRateZones = UserProfile.getHeartRateZones(UserProfile.getCurrentSport());
+        var heartRateZones = UserProfile.getHeartRateZones(UserProfile.getCurrentSport());
         hrZoneCalc = new CurrentHRZone(heartRateZones);
         labelValue = Rez.Strings.label;
     }
