@@ -7,7 +7,12 @@ class HRwithzoneView extends DataFieldWithFiveValuesView {
 
     function initialize() {
         DataFieldWithFiveValuesView.initialize();
-        var heartRateZones = UserProfile.getHeartRateZones(UserProfile.getCurrentSport());
+        onSettingsChanged();
+    }
+    
+    function onSettingsChanged()
+    {
+    	var heartRateZones = UserProfile.getHeartRateZones(UserProfile.getCurrentSport());
         hrZoneCalc = new CurrentHRZone(heartRateZones);
         labelValue = Rez.Strings.label;
     }

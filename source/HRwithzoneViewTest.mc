@@ -60,6 +60,9 @@ class HRwithzoneViewTest {
 		var hrWithzoneView = new HRwithzoneViewMock();
 		var hrZoneCalcMock = new HrZoneCalcMock([]);
 		
+		hrWithzoneView.onSettingsChanged();
+		hrWithzoneView.onSettingsChanged();
+		
 		hrWithzoneView.setHrZoneCalc(hrZoneCalcMock);
 		
 		Test.assertEqual(hrWithzoneView.getMainValue(), "");
